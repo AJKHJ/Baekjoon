@@ -1,21 +1,17 @@
-#include <iostream>
-#include <string>
-using namespace std;
+#include<bits/stdc++.h>
+
+using namespace std; 
+
+int n; 
 
 int main() {
-	int n;
-	int result = 0;
-	
-    string temp;
-	cin >> n;
-
-	for (int i = 0; i < n; i++) {
-		while (1) {
-			result++;
-			temp = to_string(result);
-			if (temp.find("666") != -1)
-				break;
-		}
-	}
-	cout << result << endl;
+    cin >> n; 
+    int i = 666; 
+    while(1){
+        if(to_string(i).find("666") != string::npos)
+            n--; 
+        if(n == 0)break;
+        i++;
+    }
+    cout << i << "\n"; 
 }
