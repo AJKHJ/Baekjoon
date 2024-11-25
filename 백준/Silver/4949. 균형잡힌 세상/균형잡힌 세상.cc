@@ -1,56 +1,44 @@
-#include <iostream>
-#include <algorithm>
-#include <vector>
-#include <stack>
-#include <string>
+#include <bits/stdc++.h>
+
 using namespace std;
+typedef long long ll;
 
 int main(){
-    ios_base::sync_with_stdio(0);   
-    cin.tie(0); cout.tie(0);
-
-    char cha;
-
-    while(1){
-        string str;
-        getline(cin , str);
-
-        if(str == ".")
-            break;
-        
-        stack<char>stk;
-        bool flag = 0;
-
-        for(int i = 0 ; i < str.length() ; i++){
-            char c = str[i];
-
-            if(c == '(' || c == '['){
-                stk.push(c);
-            }
-
-            else if(c == ')'){
-                if(!stk.empty() && stk.top() == '(')
-                    stk.pop();
-                else{
-                    flag = 1;
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(NULL);
+    
+    while (1){
+        string s;
+        getline(cin, s);
+        if(s == ".") break;
+        stack<char> stk;
+        bool chk = true;
+        for(int i = 0 ; i < s.length() ; i++){
+            char c = s[i];
+            if(c == '(') stk.push(c);
+            if(c == '[') stk.push(c);
+            if(c == ')'){
+                if(stk.size() == 0 || stk.top() == '['){
+                    chk = false;
                     break;
-                }
-            }
-
-            else if(c == ']'){
-                if(!stk.empty() && stk.top() == '[')
+                }else
                     stk.pop();
-                else{
-                    flag = 1;
+            }
+            if(c == ']'){
+                if(stk.size() == 0 || stk.top() == '('){
+                    chk = false;
                     break;
-                }
+                }else
+                    stk.pop();
             }
         }
-        if (flag==0 && stk.empty()) {
-            cout << "yes" << endl;
-        }
-        else {
-            cout << "no" << endl;
-        }
+        if(stk.empty() && chk == true)
+            cout << "yes" << '\n';
+        else
+            cout << "no" << '\n';
     }
+    
+
+    return 0;
 }
